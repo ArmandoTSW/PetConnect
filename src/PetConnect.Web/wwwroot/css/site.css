@@ -1,0 +1,52 @@
+html {
+  font-size: 16px;
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  background: #f7f9fc;
+  color: #1f2937;
+  margin-bottom: 70px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}
+
+.summary-panel,
+.feature-box,
+.detail-panel,
+.form-panel,
+.empty-state {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.feature-box,
+.pet-card {
+  box-shadow: 0 10px 24px rgba(31, 41, 55, 0.06);
+}
+
+.pet-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.status-select {
+  min-width: 130px;
+}
+
+.footer {
+  background: #ffffff;
+  bottom: 0;
+  line-height: 60px;
+  position: absolute;
+  width: 100%;
+}

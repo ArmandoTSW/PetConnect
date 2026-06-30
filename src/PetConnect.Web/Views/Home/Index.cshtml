@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<section class="row align-items-center g-4 py-4">
+    <div class="col-lg-7">
+        <span class="badge text-bg-success mb-3">Adopciones responsables</span>
+        <h1 class="display-5 fw-bold">Gestiona adopciones de mascotas de forma clara y sencilla</h1>
+        <p class="lead text-secondary mt-3">
+            PetConnect permite consultar mascotas disponibles, registrar adoptantes y dar seguimiento a las solicitudes de adopcion desde una interfaz web MVC.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+            <a class="btn btn-primary btn-lg" asp-controller="Mascotas" asp-action="Index">Ver mascotas</a>
+            <a class="btn btn-outline-primary btn-lg" asp-controller="Solicitudes" asp-action="Create">Crear solicitud</a>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="summary-panel">
+            <h2 class="h4">Flujo principal</h2>
+            <ol class="list-group list-group-numbered mt-3">
+                <li class="list-group-item">Explorar mascotas disponibles.</li>
+                <li class="list-group-item">Registrar datos del adoptante.</li>
+                <li class="list-group-item">Crear y revisar la solicitud.</li>
+                <li class="list-group-item">Cambiar estado a pendiente, aprobada o rechazada.</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section class="row g-3 mt-2">
+    <div class="col-md-4">
+        <div class="feature-box">
+            <h2 class="h5">Mascotas</h2>
+            <p>Consulta nombre, especie, edad y descripcion de cada mascota disponible.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-box">
+            <h2 class="h5">Adoptantes</h2>
+            <p>Registra los datos basicos de personas interesadas en adoptar.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-box">
+            <h2 class="h5">Solicitudes</h2>
+            <p>Administra solicitudes y actualiza su estado desde una vista sencilla.</p>
+        </div>
+    </div>
+</section>

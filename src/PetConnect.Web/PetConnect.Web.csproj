@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetConnect.Application\PetConnect.Application.csproj" />
+    <ProjectReference Include="..\PetConnect.Domain\PetConnect.Domain.csproj" />
+    <ProjectReference Include="..\PetConnect.Infrastructure\PetConnect.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>

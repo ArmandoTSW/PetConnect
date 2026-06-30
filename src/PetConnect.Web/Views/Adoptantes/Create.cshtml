@@ -1,0 +1,38 @@
+@model PetConnect.Domain.Entities.Adoptante
+
+@{
+    ViewData["Title"] = "Registrar adoptante";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="form-panel">
+            <h1 class="h2 mb-2">Registrar adoptante</h1>
+            <p class="text-secondary">Guarda los datos basicos de la persona interesada en adoptar.</p>
+
+            <form asp-action="Create" method="post" class="mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Correo" class="form-label"></label>
+                    <input asp-for="Correo" type="email" class="form-control" />
+                </div>
+                <div class="mb-4">
+                    <label asp-for="Telefono" class="form-label"></label>
+                    <input asp-for="Telefono" class="form-control" />
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Guardar adoptante</button>
+                    <a class="btn btn-outline-secondary" asp-controller="Solicitudes" asp-action="Create">Ir a solicitud</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

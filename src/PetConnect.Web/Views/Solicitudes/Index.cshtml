@@ -1,0 +1,63 @@
+@model PetConnect.Web.ViewModels.SolicitudesIndexViewModel
+@using PetConnect.Domain.Entities
+
+@{
+    ViewData["Title"] = "Solicitudes";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <h1 class="h2 mb-1">Solicitudes de adopcion</h1>
+        <p class="text-secondary mb-0">Consulta y actualiza el estado de las solicitudes registradas.</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Create">Nueva solicitud</a>
+</div>
+
+@if (!Model.Solicitudes.Any())
+{
+    <div class="empty-state">
+        <h2 class="h5">Aun no hay solicitudes</h2>
+        <p class="text-secondary">Cuando registres una solicitud aparecera en esta seccion.</p>
+        <a class="btn btn-primary" asp-action="Create">Crear primera solicitud</a>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Mascota</th>
+                    <th>Adoptante</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var solicitud in Model.Solicitudes)
+                {
+                    var mascota = Model.ObtenerMascota(solicitud.MascotaId);
+                    var adoptante = Model.ObtenerAdoptante(solicitud.AdoptanteId);
+                    <tr>
+                        <td>@(mascota?.Nombre ?? "Mascota no encontrada")</td>
+                        <td>@(adoptante?.Nombre ?? "Adoptante no encontrado")</td>
+                        <td>@solicitud.FechaSolicitud.ToString("dd/MM/yyyy")</td>
+                        <td><span class="badge text-bg-secondary">@solicitud.Estado</span></td>
+                        <td>
+                            <form asp-action="CambiarEstado" method="post" class="d-flex gap-2">
+                                <input type="hidden" name="id" value="@solicitud.Id" />
+                                <select name="estado" class="form-select form-select-sm status-select">
+                                    <option value="@EstadoSolicitud.Pendiente" selected="@(solicitud.Estado == EstadoSolicitud.Pendiente)">Pendiente</option>
+                                    <option value="@EstadoSolicitud.Aprobada" selected="@(solicitud.Estado == EstadoSolicitud.Aprobada)">Aprobada</option>
+                                    <option value="@EstadoSolicitud.Rechazada" selected="@(solicitud.Estado == EstadoSolicitud.Rechazada)">Rechazada</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Actualizar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

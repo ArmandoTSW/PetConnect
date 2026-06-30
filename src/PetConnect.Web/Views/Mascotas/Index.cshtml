@@ -1,0 +1,36 @@
+@model IReadOnlyList<PetConnect.Domain.Entities.Mascota>
+
+@{
+    ViewData["Title"] = "Mascotas disponibles";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <h1 class="h2 mb-1">Mascotas disponibles</h1>
+        <p class="text-secondary mb-0">Selecciona una mascota para conocer sus detalles o iniciar una solicitud.</p>
+    </div>
+    <a class="btn btn-primary" asp-controller="Adoptantes" asp-action="Create">Registrar adoptante</a>
+</div>
+
+<div class="row g-4">
+    @foreach (var mascota in Model)
+    {
+        <div class="col-md-6 col-xl-4">
+            <div class="card pet-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                        <h2 class="h5 card-title mb-1">@mascota.Nombre</h2>
+                        <span class="badge text-bg-success">Disponible</span>
+                    </div>
+                    <p class="text-secondary mb-2">@mascota.Especie - @mascota.Raza</p>
+                    <p class="mb-3">@mascota.Descripcion</p>
+                    <p class="small text-secondary mb-3">@mascota.Edad anios</p>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@mascota.Id">Detalle</a>
+                        <a class="btn btn-primary" asp-controller="Solicitudes" asp-action="Create" asp-route-mascotaId="@mascota.Id">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
