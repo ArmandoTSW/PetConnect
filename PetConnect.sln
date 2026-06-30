@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetConnect.Domain", "src\Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetConnect.Infrastructure", "src\PetConnect.Infrastructure\PetConnect.Infrastructure.csproj", "{162DA292-5669-448B-A4CE-22E2503565C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetConnect.Api", "src\PetConnect.Api\PetConnect.Api.csproj", "{6D563750-24C4-4BCA-A3D5-BDBD1D149924}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,18 @@ Global
 		{162DA292-5669-448B-A4CE-22E2503565C6}.Release|x64.Build.0 = Release|Any CPU
 		{162DA292-5669-448B-A4CE-22E2503565C6}.Release|x86.ActiveCfg = Release|Any CPU
 		{162DA292-5669-448B-A4CE-22E2503565C6}.Release|x86.Build.0 = Release|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Debug|x64.Build.0 = Debug|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Release|x64.ActiveCfg = Release|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Release|x64.Build.0 = Release|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +94,6 @@ Global
 		{0A9654E2-A147-4C87-8F80-F3CC9DC487DC} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{EDEB8B32-9FD6-4206-88D7-9256B391D5E0} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{162DA292-5669-448B-A4CE-22E2503565C6} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{6D563750-24C4-4BCA-A3D5-BDBD1D149924} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal
