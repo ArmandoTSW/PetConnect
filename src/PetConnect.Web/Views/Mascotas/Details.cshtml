@@ -5,23 +5,30 @@
 }
 
 <div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="detail-panel">
-            <a class="btn btn-link px-0 mb-3" asp-action="Index">Volver a mascotas</a>
-            <div class="d-flex flex-wrap justify-content-between gap-3">
-                <div>
-                    <h1 class="h2">@Model.Nombre</h1>
-                    <p class="text-secondary">@Model.Especie - @Model.Raza</p>
+    <div class="col-lg-9">
+        <section class="detail-panel">
+            <a class="back-link" asp-action="Index">Volver a mascotas</a>
+            <div class="row g-4 align-items-center">
+                <div class="col-md-4">
+                    <div class="pet-detail-avatar">@Model.Nombre.Substring(0, 1)</div>
                 </div>
-                <span class="badge align-self-start text-bg-success">Disponible</span>
+                <div class="col-md-8">
+                    <span class="status-pill">Disponible</span>
+                    <h1>@Model.Nombre</h1>
+                    <p class="lead text-secondary">@Model.Especie - @Model.Raza</p>
+                    <dl class="detail-list">
+                        <div>
+                            <dt>Edad</dt>
+                            <dd>@Model.Edad anios</dd>
+                        </div>
+                        <div>
+                            <dt>Descripcion</dt>
+                            <dd>@Model.Descripcion</dd>
+                        </div>
+                    </dl>
+                    <a class="btn btn-primary btn-lg" asp-controller="Solicitudes" asp-action="Create" asp-route-mascotaId="@Model.Id">Crear solicitud</a>
+                </div>
             </div>
-            <dl class="row mt-4">
-                <dt class="col-sm-3">Edad</dt>
-                <dd class="col-sm-9">@Model.Edad anios</dd>
-                <dt class="col-sm-3">Descripcion</dt>
-                <dd class="col-sm-9">@Model.Descripcion</dd>
-            </dl>
-            <a class="btn btn-primary" asp-controller="Solicitudes" asp-action="Create" asp-route-mascotaId="@Model.Id">Crear solicitud</a>
-        </div>
+        </section>
     </div>
 </div>

@@ -4,12 +4,17 @@
     ViewData["Title"] = "Crear solicitud";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="form-panel">
-            <h1 class="h2 mb-2">Crear solicitud de adopcion</h1>
-            <p class="text-secondary">Relaciona una mascota disponible con un adoptante registrado.</p>
+<section class="page-title narrow">
+    <div>
+        <span>Solicitudes</span>
+        <h1>Crear solicitud de adopcion</h1>
+        <p>Relaciona una mascota disponible con un adoptante registrado.</p>
+    </div>
+</section>
 
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <section class="form-panel">
             @if (!Model.Adoptantes.Any())
             {
                 <div class="alert alert-warning">
@@ -18,29 +23,31 @@
                 </div>
             }
 
-            <form asp-action="Create" method="post" class="mt-4">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                <div class="mb-3">
-                    <label asp-for="Solicitud.MascotaId" class="form-label">Mascota</label>
-                    <select asp-for="Solicitud.MascotaId" asp-items="Model.Mascotas" class="form-select" required>
-                        <option value="">Selecciona una mascota</option>
-                    </select>
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Solicitud.MascotaId" class="form-label">Mascota</label>
+                        <select asp-for="Solicitud.MascotaId" asp-items="Model.Mascotas" class="form-select form-select-lg" required>
+                            <option value="">Selecciona una mascota</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Solicitud.AdoptanteId" class="form-label">Adoptante</label>
+                        <select asp-for="Solicitud.AdoptanteId" asp-items="Model.Adoptantes" class="form-select form-select-lg" required>
+                            <option value="">Selecciona un adoptante</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="Solicitud.Comentarios" class="form-label">Comentarios</label>
+                        <textarea asp-for="Solicitud.Comentarios" class="form-control" rows="4" placeholder="Notas sobre la solicitud"></textarea>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="Solicitud.AdoptanteId" class="form-label">Adoptante</label>
-                    <select asp-for="Solicitud.AdoptanteId" asp-items="Model.Adoptantes" class="form-select" required>
-                        <option value="">Selecciona un adoptante</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label asp-for="Solicitud.Comentarios" class="form-label">Comentarios</label>
-                    <textarea asp-for="Solicitud.Comentarios" class="form-control" rows="4"></textarea>
-                </div>
-                <div class="d-flex flex-wrap gap-2">
-                    <button type="submit" class="btn btn-primary" disabled="@(!Model.Adoptantes.Any())">Crear solicitud</button>
-                    <a class="btn btn-outline-secondary" asp-controller="Mascotas" asp-action="Index">Ver mascotas</a>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg" disabled="@(!Model.Adoptantes.Any())">Crear solicitud</button>
+                    <a class="btn btn-outline-secondary btn-lg" asp-controller="Mascotas" asp-action="Index">Ver mascotas</a>
                 </div>
             </form>
-        </div>
+        </section>
     </div>
 </div>
