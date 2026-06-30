@@ -27,9 +27,7 @@ public class SolicitudesController : Controller
     {
         var viewModel = new SolicitudesIndexViewModel
         {
-            Solicitudes = _solicitudService.Listar(),
-            Mascotas = _mascotaService.ListarTodas(),
-            Adoptantes = _adoptanteService.Listar()
+            Solicitudes = _solicitudService.ListarDetalle()
         };
 
         return View(viewModel);

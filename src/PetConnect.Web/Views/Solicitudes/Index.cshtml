@@ -37,11 +37,9 @@ else
             <tbody>
                 @foreach (var solicitud in Model.Solicitudes)
                 {
-                    var mascota = Model.ObtenerMascota(solicitud.MascotaId);
-                    var adoptante = Model.ObtenerAdoptante(solicitud.AdoptanteId);
                     <tr>
-                        <td>@(mascota?.Nombre ?? "Mascota no encontrada")</td>
-                        <td>@(adoptante?.Nombre ?? "Adoptante no encontrado")</td>
+                        <td>@solicitud.Mascota</td>
+                        <td>@solicitud.Adoptante</td>
                         <td>@solicitud.FechaSolicitud.ToString("dd/MM/yyyy")</td>
                         <td><span class="badge text-bg-secondary">@solicitud.Estado</span></td>
                         <td>
