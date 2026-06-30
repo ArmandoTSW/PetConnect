@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PetConnect.Application.Services;
 using PetConnect.Domain.Entities;
+using PetConnect.Domain.Exceptions;
 using PetConnect.Web.ViewModels;
 
 namespace PetConnect.Web.Controllers;
@@ -55,7 +56,7 @@ public class SolicitudesController : Controller
             TempData["Mensaje"] = "Solicitud creada correctamente.";
             return RedirectToAction(nameof(Index));
         }
-        catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)
+        catch (ReglaNegocioException ex)
         {
             ModelState.AddModelError(string.Empty, ex.Message);
             var formulario = CrearFormulario();
@@ -73,7 +74,7 @@ public class SolicitudesController : Controller
             _solicitudService.CambiarEstado(id, estado);
             TempData["Mensaje"] = "Estado actualizado correctamente.";
         }
-        catch (ArgumentException ex)
+        catch (ReglaNegocioException ex)
         {
             TempData["Error"] = ex.Message;
         }
