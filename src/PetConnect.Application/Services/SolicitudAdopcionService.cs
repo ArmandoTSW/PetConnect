@@ -1,4 +1,6 @@
+using PetConnect.Application.DTOs;
 using PetConnect.Application.Interfaces;
+using PetConnect.Application.UseCases;
 using PetConnect.Domain.Entities;
 
 namespace PetConnect.Application.Services;
@@ -8,15 +10,21 @@ public class SolicitudAdopcionService
     private readonly ISolicitudAdopcionRepository _solicitudRepository;
     private readonly IMascotaRepository _mascotaRepository;
     private readonly IAdoptanteRepository _adoptanteRepository;
+    private readonly CrearSolicitudAdopcionUseCase _crearSolicitudUseCase;
+    private readonly CambiarEstadoSolicitudUseCase _cambiarEstadoUseCase;
 
     public SolicitudAdopcionService(
         ISolicitudAdopcionRepository solicitudRepository,
         IMascotaRepository mascotaRepository,
-        IAdoptanteRepository adoptanteRepository)
+        IAdoptanteRepository adoptanteRepository,
+        CrearSolicitudAdopcionUseCase crearSolicitudUseCase,
+        CambiarEstadoSolicitudUseCase cambiarEstadoUseCase)
     {
         _solicitudRepository = solicitudRepository;
         _mascotaRepository = mascotaRepository;
         _adoptanteRepository = adoptanteRepository;
+        _crearSolicitudUseCase = crearSolicitudUseCase;
+        _cambiarEstadoUseCase = cambiarEstadoUseCase;
     }
 
     public IReadOnlyList<SolicitudAdopcion> Listar()
@@ -24,59 +32,34 @@ public class SolicitudAdopcionService
         return _solicitudRepository.ObtenerTodas();
     }
 
+    public IReadOnlyList<SolicitudDetalleDto> ListarDetalle()
+    {
+        return _solicitudRepository.ObtenerTodas()
+            .Select(solicitud =>
+            {
+                var mascota = _mascotaRepository.ObtenerPorId(solicitud.MascotaId);
+                var adoptante = _adoptanteRepository.ObtenerPorId(solicitud.AdoptanteId);
+
+                return new SolicitudDetalleDto
+                {
+                    Id = solicitud.Id,
+                    Mascota = mascota?.Nombre ?? "Mascota no encontrada",
+                    Adoptante = adoptante?.Nombre ?? "Adoptante no encontrado",
+                    FechaSolicitud = solicitud.FechaSolicitud,
+                    Estado = solicitud.Estado,
+                    Comentarios = solicitud.Comentarios
+                };
+            })
+            .ToList();
+    }
+
     public SolicitudAdopcion Crear(SolicitudAdopcion solicitud)
     {
-        var mascota = _mascotaRepository.ObtenerPorId(solicitud.MascotaId);
-        if (mascota is null)
-        {
-            throw new ArgumentException("La mascota seleccionada no existe.");
-        }
-
-        if (!mascota.Disponible)
-        {
-            throw new InvalidOperationException("La mascota ya no esta disponible.");
-        }
-
-        if (_adoptanteRepository.ObtenerPorId(solicitud.AdoptanteId) is null)
-        {
-            throw new ArgumentException("El adoptante seleccionado no existe.");
-        }
-
-        var duplicada = _solicitudRepository.ObtenerTodas()
-            .Any(item => item.MascotaId == solicitud.MascotaId
-                && item.AdoptanteId == solicitud.AdoptanteId
-                && item.Estado == EstadoSolicitud.Pendiente);
-
-        if (duplicada)
-        {
-            throw new InvalidOperationException("Ya existe una solicitud pendiente para esta mascota y adoptante.");
-        }
-
-        solicitud.FechaSolicitud = DateTime.Today;
-        solicitud.Estado = EstadoSolicitud.Pendiente;
-
-        return _solicitudRepository.Agregar(solicitud);
+        return _crearSolicitudUseCase.Ejecutar(solicitud);
     }
 
     public void CambiarEstado(int id, EstadoSolicitud estado)
     {
-        var solicitud = _solicitudRepository.ObtenerPorId(id);
-        if (solicitud is null)
-        {
-            throw new ArgumentException("La solicitud no existe.");
-        }
-
-        solicitud.Estado = estado;
-        _solicitudRepository.Actualizar(solicitud);
-
-        if (estado == EstadoSolicitud.Aprobada)
-        {
-            var mascota = _mascotaRepository.ObtenerPorId(solicitud.MascotaId);
-            if (mascota is not null)
-            {
-                mascota.Disponible = false;
-                _mascotaRepository.Actualizar(mascota);
-            }
-        }
+        _cambiarEstadoUseCase.Ejecutar(id, estado);
     }
 }

@@ -16,12 +16,14 @@ Muchas adopciones requieren organizar informacion basica de mascotas, personas i
 
 ## Arquitectura
 
-La version base separa el proyecto en capas simples:
+La aplicacion usa una arquitectura hexagonal sencilla:
 
-- `PetConnect.Domain`: entidades principales del negocio.
-- `PetConnect.Application`: servicios e interfaces.
-- `PetConnect.Infrastructure`: repositorios en memoria.
-- `PetConnect.Web`: interfaz web MVC.
+- `PetConnect.Domain`: entidades principales, value objects y excepciones de negocio.
+- `PetConnect.Application`: interfaces, DTOs, servicios y casos de uso.
+- `PetConnect.Infrastructure`: repositorios en memoria y registro de dependencias.
+- `PetConnect.Web`: adaptador de entrada con interfaz MVC y vistas Bootstrap 5.
+
+La idea principal es que la logica de adopcion viva en `Domain` y `Application`, mientras que `Web` solo se encarga de recibir datos del usuario y mostrar resultados.
 
 ## Estructura de carpetas
 
@@ -47,7 +49,7 @@ dotnet run --project src/PetConnect.Web
 
 ## Ejecutar API
 
-La API REST se agregara en una rama posterior como complemento tecnico.
+La API REST funciona como complemento tecnico para probar las operaciones con Swagger.
 
 ```bash
 dotnet run --project src/PetConnect.Api
@@ -55,7 +57,14 @@ dotnet run --project src/PetConnect.Api
 
 ## Endpoints principales
 
-Pendiente de agregar cuando exista `PetConnect.Api`.
+- `GET /api/mascotas`
+- `GET /api/mascotas/{id}`
+- `POST /api/mascotas`
+- `GET /api/adoptantes`
+- `POST /api/adoptantes`
+- `GET /api/solicitudes`
+- `POST /api/solicitudes`
+- `PUT /api/solicitudes/{id}/estado`
 
 ## Capturas
 
