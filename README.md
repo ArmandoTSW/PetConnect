@@ -49,7 +49,7 @@ dotnet run --project src/PetConnect.Web
 
 ## Ejecutar API
 
-La API REST se agregara en una rama posterior como complemento tecnico.
+La API REST funciona como complemento tecnico para probar las operaciones con Swagger.
 
 ```bash
 dotnet run --project src/PetConnect.Api
@@ -57,7 +57,14 @@ dotnet run --project src/PetConnect.Api
 
 ## Endpoints principales
 
-Pendiente de agregar cuando exista `PetConnect.Api`.
+- `GET /api/mascotas`
+- `GET /api/mascotas/{id}`
+- `POST /api/mascotas`
+- `GET /api/adoptantes`
+- `POST /api/adoptantes`
+- `GET /api/solicitudes`
+- `POST /api/solicitudes`
+- `PUT /api/solicitudes/{id}/estado`
 
 ## Capturas
 

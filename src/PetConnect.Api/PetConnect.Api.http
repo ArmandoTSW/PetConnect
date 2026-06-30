@@ -1,6 +1,17 @@
 @PetConnect.Api_HostAddress = http://localhost:5010
 
-GET {{PetConnect.Api_HostAddress}}/weatherforecast/
+GET {{PetConnect.Api_HostAddress}}/api/mascotas/
 Accept: application/json
+
+###
+
+POST {{PetConnect.Api_HostAddress}}/api/adoptantes/
+Content-Type: application/json
+
+{
+  "nombre": "Ana Lopez",
+  "correo": "ana@example.com",
+  "telefono": "9991234567"
+}
 
 ###
